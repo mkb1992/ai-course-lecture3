@@ -78,7 +78,9 @@ def render(
             return
         if topic == TREE_TOPIC:
             with st.container(key="dtx_body"):
-                tab_intuition, tab_exercise, tab_practical = st.tabs(["Intuition", "Exercise", "Visualisation"])
+                tab_intuition, tab_exercise, tab_practical, tab_overfit = st.tabs(
+                    ["Intuition", "Exercise", "Visualisation", "Overfitting & pruning"]
+                )
                 with tab_intuition:
                     from services.decision_tree import render_intuition
 
@@ -89,6 +91,10 @@ def render(
                     from services.decision_tree import render as render_tree
 
                     render_tree()
+                with tab_overfit:
+                    from services.decision_tree import render_grow
+
+                    render_grow()
             return
         if topic == BOW_TOPIC:
             with st.container(key="bow_body"):

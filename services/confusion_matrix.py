@@ -98,10 +98,10 @@ _PAGE = r"""<!doctype html>
   .mspark { display: block; width: 80px; height: 38px; }
   .mcard:hover { background: #f7f9fc; }
   .mcard.on { border: 2.5px solid #c9973a; background: #fbf6ec; box-shadow: 0 2px 10px rgba(201,151,58,0.18); }
-  .cost-card { display: block; cursor: default; padding: 10px 14px; }
-  .cost-card h3 { margin: 0 0 5px; font-size: 0.95rem; }
-  .cost-card p { margin: 3px 0; color: #475569; font-size: 0.74rem; line-height: 1.25; }
-  .cost-card .cost-total { margin-top: 6px; padding-top: 6px; border-top: 1px solid #d7dde7; color: #0b1f3a; font-size: 1.1rem; font-weight: 800; }
+  .cost-card { display: block; cursor: default; width: 360px; min-width: 360px; padding: 14px 18px; }
+  .cost-card h3 { margin: 0 0 8px; font-size: 1.08rem; }
+  .cost-card p { margin: 5px 0; color: #475569; font-size: 0.86rem; line-height: 1.4; white-space: nowrap; }
+  .cost-card .cost-total { margin-top: 9px; padding-top: 8px; border-top: 1px solid #d7dde7; color: #0b1f3a; font-size: 1.35rem; font-weight: 800; }
   .cost-card .cost-save { color: #1b7a47; font-weight: 800; }
   .cost-card .cost-save.loss { color: #b91c1c; }
   .mtext b { display: block; font-size: 1rem; font-weight: 800; letter-spacing: -0.01em; }
