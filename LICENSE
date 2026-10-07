@@ -1,0 +1,90 @@
+Copyright © 2026 Birla Institute of Technology and Science (BITS Pilani).
+All rights reserved.
+
+These materials were developed for the Foundations of AI course at
+BITS School of Management (BITSoM).
+
+PROPRIETARY AND CONFIDENTIAL
+
+This repository, including its source code, software, course materials,
+documentation, text, graphics, interfaces, datasets, exercises, prompts,
+examples, assessments, and other accompanying materials (collectively,
+the "Materials"), is proprietary and is made available solely for
+authorised academic, instructional, administrative, and course-delivery
+purposes.
+
+Except as expressly authorised in writing by Birla Institute of Technology
+and Science (BITS Pilani) or BITS School of Management (BITSoM), as
+applicable, no person may copy, reproduce, modify, adapt, translate,
+publish, distribute, transmit, sublicense, sell, commercially exploit,
+publicly display, publicly perform, create derivative works from, or
+otherwise use or make available the Materials, in whole or in part.
+
+Authorised instructors, staff, contractors, and other expressly authorised
+users may use and modify the Materials only to the extent reasonably
+necessary to develop, administer, deliver, maintain, or support the
+relevant BITSoM course or academic activity. Such permission is limited,
+non-exclusive, non-transferable, non-sublicensable, and revocable, and
+does not transfer any ownership or intellectual-property rights.
+
+Unless expressly authorised in writing, the Materials may not be used to
+create commercial products or services; incorporated into external
+training material; republished in another repository, website, course, or
+platform; or used for the training, fine-tuning, distillation, evaluation,
+or creation of datasets for artificial-intelligence or machine-learning
+systems.
+
+CREDENTIALS, CONFIDENTIAL INFORMATION, AND PERSONAL DATA
+
+API keys, access tokens, passwords, secrets, authentication credentials,
+student records, personal data, assessment data, and other confidential
+or restricted information are not intended to form part of this repository.
+
+Such information must not be committed to source control, published,
+redistributed, or disclosed to unauthorised persons. Any authorised user
+handling such information is responsible for complying with applicable
+institutional policies, contractual obligations, privacy requirements, and
+applicable law.
+
+THIRD-PARTY MATERIALS
+
+The repository may reference, interface with, incorporate, or depend upon
+third-party software, APIs, models, libraries, datasets, trademarks, or
+other materials. Such third-party materials remain subject to their
+respective licences, terms of use, and intellectual-property rights.
+
+Nothing in this notice grants rights to any third-party material beyond
+those granted by the applicable third party.
+
+TRADEMARKS
+
+BITS Pilani, BITSoM, BITS School of Management, their names, logos, marks,
+and associated branding are owned by or used under authority of their
+respective rights holders. No licence or right to use any such trademark,
+service mark, logo, trade name, or branding is granted by this notice
+except as expressly authorised.
+
+RESERVATION OF RIGHTS
+
+No licence or other right is granted by implication, estoppel, or
+otherwise except for the limited permissions expressly stated above.
+All rights not expressly granted are reserved.
+
+DISCLAIMER
+
+THE MATERIALS AND SOFTWARE ARE PROVIDED "AS IS" AND "AS AVAILABLE",
+WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY,
+OR OTHERWISE, INCLUDING, WITHOUT LIMITATION, WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY,
+NON-INFRINGEMENT, RELIABILITY, OR AVAILABILITY.
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE RIGHTS HOLDER,
+BITSoM, BITS PILANI, AND THEIR TRUSTEES, OFFICERS, FACULTY, EMPLOYEES,
+REPRESENTATIVES, AND CONTRIBUTORS SHALL NOT BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR OTHER
+DAMAGES ARISING FROM OR RELATED TO THE USE OF, RELIANCE UPON, OR
+INABILITY TO USE THE MATERIALS OR SOFTWARE.
+
+Use of this repository does not constitute endorsement, certification, or
+warranty by BITSoM or BITS Pilani of any third-party product, service,
+model, platform, or technology.
