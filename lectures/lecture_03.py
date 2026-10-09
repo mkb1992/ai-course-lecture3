@@ -5,24 +5,27 @@ import copy
 import streamlit as st
 
 TITLE = "Lecture 3"
-SUB_LECTURES = ["Confusion Matrix", "Decision Tree", "Confusion Matrix 2"]
+SUB_LECTURES = ["Confusion Matrix", "Decision Tree", "Confusion Matrix 2", "K-means Clustering"]
 TOPICS = {
     "Confusion Matrix": ["Confusion Matrix"],
     "Decision Tree": ["Decision Tree"],
     "Confusion Matrix 2": ["Confusion Matrix 2"],
+    "K-means Clustering": ["K-means Clustering"],
 }
-PICK_SUB = "Pick Confusion Matrix, Decision Tree, or Confusion Matrix 2 to open that section."
+PICK_SUB = "Pick Confusion Matrix, Decision Tree, Confusion Matrix 2, or K-means Clustering to open that section."
 PICK_TOPIC = "Pick a topic to open that section."
 PICK_TOPIC_BY_SUB = {
     "Confusion Matrix": "Pick Confusion Matrix to open that section.",
     "Decision Tree": "Pick Decision Tree to open that section.",
     "Confusion Matrix 2": "Pick Confusion Matrix 2 to open that section.",
+    "K-means Clustering": "Pick K-means Clustering to open that section.",
 }
 
 TOPIC_NAME = "Neural Networks"
 CONFUSION_TOPIC = "Confusion Matrix"
 TREE_TOPIC = "Decision Tree"
 CONFUSION_2_TOPIC = "Confusion Matrix 2"
+KMEANS_TOPIC = "K-means Clustering"
 BOW_TOPIC = "Bag of Words"
 SE_TOPIC = "Sentence Embeddings"
 WORD2VEC_COLAB = "https://colab.research.google.com/drive/1TveiLA0DLXDiq-MZZSHX9xwC1kJCBLm7?usp=sharing"
@@ -95,6 +98,12 @@ def render(
                     from services.decision_tree import render_grow
 
                     render_grow()
+            return
+        if topic == KMEANS_TOPIC:
+            with st.container(key="kmeans_body"):
+                from services import kmeans_pins
+
+                kmeans_pins.render()
             return
         if topic == BOW_TOPIC:
             with st.container(key="bow_body"):
