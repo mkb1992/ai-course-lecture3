@@ -123,12 +123,13 @@ def match_colours(ref, other, k):
 # ---------------------------------------------------------------------------
 # Drawing
 # ---------------------------------------------------------------------------
-def base_layout(fig, height=520):
+def base_layout(fig, height=380):
     fig.update_layout(
-        height=height, margin=dict(l=10, r=10, t=10, b=10), showlegend=False,
+        height=height, autosize=True, margin=dict(l=8, r=8, t=8, b=8), showlegend=False,
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
         xaxis=dict(range=[0, 10], visible=False, fixedrange=True),
-        yaxis=dict(range=[0, 10], visible=False, fixedrange=True, scaleanchor="x", scaleratio=1),
+        yaxis=dict(range=[0, 10], visible=False, fixedrange=True, scaleanchor="x", scaleratio=1,
+                   constrain="domain"),
         hovermode="closest",
     )
     # the room's walls
@@ -168,7 +169,7 @@ def lines_trace(X, C, labels):
                       hoverinfo="skip", name="walks")
 
 
-def state_figure(X, step, show_lines=True, height=520):
+def state_figure(X, step, show_lines=True, height=380):
     fig = go.Figure()
     base_layout(fig, height)
     if step["labels"] is not None and show_lines and step["phase"] != "move":
@@ -196,7 +197,7 @@ def state_figure(X, step, show_lines=True, height=520):
     return fig
 
 
-def animated_figure(X, steps, height=520):
+def animated_figure(X, steps, height=360):
     """The whole run as a Plotly animation, with its own play button."""
     def frame_data(s):
         labels = s["labels"]
@@ -222,11 +223,11 @@ def animated_figure(X, steps, height=520):
         title=dict(text=caption(steps[0]), x=0.01, font=dict(size=15, color=INK)),
         updatemenus=[dict(type="buttons", showactive=False, x=0.0, y=-0.02, xanchor="left", yanchor="top",
                           direction="left",
-                          buttons=[dict(label="▶  Play", method="animate",
+                          buttons=[dict(label="â–¶  Play", method="animate",
                                         args=[None, dict(frame=dict(duration=1100, redraw=True),
                                                          transition=dict(duration=600, easing="cubic-in-out"),
                                                          fromcurrent=True, mode="immediate")]),
-                                   dict(label="❚❚  Pause", method="animate",
+                                   dict(label="âšâš  Pause", method="animate",
                                         args=[[None], dict(frame=dict(duration=0, redraw=False),
                                                            mode="immediate")])])],
         sliders=[dict(active=0, x=0.22, y=-0.02, len=0.78, xanchor="left", yanchor="top",
@@ -256,9 +257,9 @@ def beat_walk(X):
     i = st.session_state[key]
 
     b1, b2, b3, b4 = st.columns(4)
-    if b1.button("◀  Back", use_container_width=True, disabled=i == 0, key="b1_back"):
+    if b1.button("â—€  Back", use_container_width=True, disabled=i == 0, key="b1_back"):
         st.session_state[key] = i = max(0, i - 1)
-    if b2.button("Next step  ▶", type="primary", use_container_width=True,
+    if b2.button("Next step  â–¶", type="primary", use_container_width=True,
                  disabled=i == len(steps) - 1, key="b1_next"):
         st.session_state[key] = i = min(len(steps) - 1, i + 1)
     if b3.button("Jump to the end", use_container_width=True, key="b1_end"):
@@ -284,8 +285,8 @@ def beat_walk(X):
                "That is the whole algorithm.")
     (st.success if s["phase"] == "done" else st.info)(msg)
 
-    st.plotly_chart(state_figure(X, s, show_lines), use_container_width=True,
-                    config={"displayModeBar": False}, key=f"b1_fig_{key}_{i}")
+    st.plotly_chart(state_figure(X, s, show_lines, height=380), use_container_width=True,
+                    config={"displayModeBar": False, "responsive": True}, key=f"b1_fig_{key}_{i}")
 
     m1, m2, m3 = st.columns(3)
     m1.metric("Round", s["round"])
@@ -295,7 +296,7 @@ def beat_walk(X):
 
     with st.expander("Watch it run on its own"):
         st.plotly_chart(animated_figure(X, steps), use_container_width=True,
-                        config={"displayModeBar": False}, key=f"b1_anim_{key}")
+                        config={"displayModeBar": False, "responsive": True}, key=f"b1_anim_{key}")
 
 
 def beat_k(X):
@@ -306,12 +307,12 @@ def beat_k(X):
 
     left, right = st.columns([3, 2])
     with left:
-        st.plotly_chart(state_figure(X, s, show_lines=False, height=480), use_container_width=True,
-                        config={"displayModeBar": False}, key=f"b2_fig_{k}")
+        st.plotly_chart(state_figure(X, s, show_lines=False, height=340), use_container_width=True,
+                        config={"displayModeBar": False, "responsive": True}, key=f"b2_fig_{k}")
     with right:
         st.markdown(f"### {k} groups")
         st.markdown("  \n".join(
-            f"<span style='color:{PIN_COLOURS[j]}; font-size:1.3em'>◆</span> Pin {j + 1}: **{n}** people"
+            f"<span style='color:{PIN_COLOURS[j]}; font-size:1.3em'>â—†</span> Pin {j + 1}: **{n}** people"
             for j, n in enumerate(sizes)), unsafe_allow_html=True)
         st.metric("Total walking distance", f"{walking_distance(X, s['C'], s['labels']):.0f} m")
         st.caption("More pins, less walking, every time. At 55 pins everyone stands on their own pin, "
@@ -326,10 +327,10 @@ def beat_start(X):
     k = c1.number_input("Pins (k)", 2, 8, DEFAULT_K, key="b3_k")
     if "b3_seeds" not in st.session_state:
         st.session_state.b3_seeds = list(BEAT3_SEEDS)
-    if c3.button("🎲  Throw both sets of pins again", use_container_width=True, key="b3_throw"):
+    if c3.button("ðŸŽ²  Throw both sets of pins again", use_container_width=True, key="b3_throw"):
         st.session_state.b3_seeds = [int(x) for x in np.random.default_rng().integers(0, 1000, 2)]
     sa, sb = st.session_state.b3_seeds
-    c2.markdown(f"<div style='padding-top:1.9rem;color:{INK}'>Run A seed <b>{sa}</b> · Run B seed <b>{sb}</b></div>",
+    c2.markdown(f"<div style='padding-top:1.9rem;color:{INK}'>Run A seed <b>{sa}</b> Â· Run B seed <b>{sb}</b></div>",
                 unsafe_allow_html=True)
 
     k = int(k)
@@ -349,19 +350,21 @@ def beat_start(X):
     with left:
         st.markdown("**Run A**")
         fa = go.Figure()
-        base_layout(fa, 430)
+        base_layout(fa, 300)
         fa.add_trace(people_trace(X, A["labels"]))
         start_ghosts(fa, sa, list(range(k)))
         fa.add_trace(pins_trace(A["C"]))
-        st.plotly_chart(fa, use_container_width=True, config={"displayModeBar": False}, key=f"b3_a_{k}_{sa}")
+        st.plotly_chart(fa, use_container_width=True,
+                        config={"displayModeBar": False, "responsive": True}, key=f"b3_a_{k}_{sa}")
     with right:
         st.markdown("**Run B**")
         fig = go.Figure()
-        base_layout(fig, 430)
+        base_layout(fig, 300)
         fig.add_trace(people_trace(X, B["labels"], colour_map=b_colours))
         start_ghosts(fig, sb, [mapping[j] for j in range(k)])
         fig.add_trace(pins_trace(B["C"], colour_ids=[mapping[j] for j in range(k)]))
-        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False},
+        st.plotly_chart(fig, use_container_width=True,
+                        config={"displayModeBar": False, "responsive": True},
                         key=f"b3_b_{k}_{sb}")
 
     m1, m2 = st.columns(2)
@@ -382,21 +385,21 @@ def render():
         <div style="display:flex;align-items:center;gap:14px;padding:16px 20px;
                     border:1.5px solid #0b1f3a;border-radius:14px;background:
                     linear-gradient(135deg,#eef4fc 0%,#fffaf0 100%);margin-bottom:10px">
-          <div style="font-size:2.2rem;line-height:1">📍</div>
+          <div style="font-size:2.2rem;line-height:1">ðŸ“</div>
           <div>
             <div style="font-size:1.35rem;font-weight:800;color:#0b1f3a">K-means clustering</div>
             <div style="font-size:.92rem;color:#475569;margin-top:3px">
-              Drop the pins · walk to the nearest one · move each pin to the middle · repeat
+              Drop the pins Â· walk to the nearest one Â· move each pin to the middle Â· repeat
             </div>
           </div>
         </div>
         """
     )
     st.markdown("## K-means, the whole algorithm")
-    st.caption("Drop k pins anywhere · everyone walks to the nearest pin · each pin moves to the middle "
-               "of its crowd · repeat until nobody moves")
+    st.caption("Drop k pins anywhere Â· everyone walks to the nearest pin Â· each pin moves to the middle "
+               "of its crowd Â· repeat until nobody moves")
     X = make_room()
-    t1, t2, t3 = st.tabs(["1 · Walk to the pins", "2 · You chose k", "3 · Where the pins started"])
+    t1, t2, t3 = st.tabs(["1 Â· Walk to the pins", "2 Â· You chose k", "3 Â· Where the pins started"])
     with t1:
         beat_walk(X)
     with t2:
@@ -406,6 +409,5 @@ def render():
 
 
 if __name__ == "__main__":
-    st.set_page_config(page_title="K-means: drop the pins", page_icon="📍", layout="wide")
+    st.set_page_config(page_title="K-means: drop the pins", page_icon="ðŸ“", layout="wide")
     render()
-
